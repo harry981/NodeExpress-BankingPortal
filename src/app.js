@@ -3,6 +3,7 @@ const path=require('path')
 
 const express=require('express');
 const { Http2ServerRequest } = require('http2');
+const { json } = require('express');
 
 const app=express();
 
@@ -11,6 +12,8 @@ app.set('views',path.join(__dirname,'./views'))
 app.set('view engine','ejs')
 
 app.use(express.static(path.join(__dirname,'./public')))
+
+app.use(express.urlencoded({extended:true}))
 
 const accountData=fs.readFileSync(path.join(__dirname,'./json/accounts.json'),{encoding:'utf8'})
 
@@ -39,6 +42,15 @@ app.get('/credit',(req,res)=>{
 
 app.get('/profile',(req,res)=>{
     return res.render('profile',{user:users[0]})
+})
+
+app.get('/transfer',(req,res)=>{
+    return res.render('transfer')
+})
+
+app.post('/transfer',(req,res)=>{
+   let newBalanace=accounts["savings"].balance-parseInt(req.body.amount)
+let accountsJSON=JSON.stringify(accounts)
 })
 
 app.listen(3000,(err)=>{
