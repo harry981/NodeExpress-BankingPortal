@@ -36,6 +36,11 @@ app.get('/checking',(req,res)=>{
 app.get('/credit',(req,res)=>{
     return res.render('account',{account: accounts.credit})
 })
+
+app.get('/profile',(req,res)=>{
+    return res.render('profile',{user:users[0]})
+})
+
 app.listen(3000,(err)=>{
        if(err){
            console.log('Something amiss')
