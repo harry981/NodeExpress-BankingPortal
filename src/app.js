@@ -29,6 +29,13 @@ app.get('/savings',(req,res)=>{
      return res.render('account',{account: accounts.savings})
 })
 
+app.get('/checking',(req,res)=>{
+    return res.render('account',{account: accounts.checking})
+})
+
+app.get('/credit',(req,res)=>{
+    return res.render('account',{account: accounts.credit})
+})
 app.listen(3000,(err)=>{
        if(err){
            console.log('Something amiss')
