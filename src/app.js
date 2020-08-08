@@ -49,8 +49,9 @@ app.get('/transfer',(req,res)=>{
 })
 
 app.post('/transfer',(req,res)=>{
-   let newBalanace=accounts["savings"].balance-parseInt(req.body.amount)
-let accountsJSON=JSON.stringify(accounts)
+   accounts[req.body.from].balance=accounts[req.body.from].balance-parseInt(req.body.amount)
+  accounts[req.body.to].balance=accounts[req.body.to].balance+parseInt(req.body.amount,10)
+   let accountsJSON=JSON.stringify(accounts,null,4)
 })
 
 app.listen(3000,(err)=>{
