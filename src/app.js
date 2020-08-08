@@ -12,8 +12,21 @@ app.set('view engine','ejs')
 
 app.use(express.static(path.join(__dirname,'./public')))
 
+const accountData=fs.readFileSync(path.join(__dirname,'./json/accounts.json'),{encoding:'utf8'})
+
+const accounts=JSON.parse(accountData)
+
+
+const userData=fs.readFileSync(path.join(__dirname,'./json/users.json'),{encoding:'utf8'})
+
+const users=JSON.parse(userData)
+
 app.get('/',(req,res)=>{
-       return res.render('index',{title:'Index'})
+       return res.render('index',{title:'Account Summary',accounts:accounts})
+})
+
+app.get('/savings',(req,res)=>{
+     return res.render('account',{account: accounts.savings})
 })
 
 app.listen(3000,(err)=>{
